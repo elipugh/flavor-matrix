@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flavor Matrix Explorer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Flavor Matrix Explorer</p>
+          <h1>Find ingredients that speak the same flavor language.</h1>
+          <p class="lede">
+            Click an ingredient to see its closest matches. Build a basket to get
+            new suggestions that fit the ingredients you already chose.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <div class="stat">
+            <span class="stat-label">Ingredients</span>
+            <span class="stat-value" id="ingredientCount">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Anchors</span>
+            <span class="stat-value" id="featureCount">—</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="loader" id="loader">
+        <div class="loader-card">
+          <div class="loader-dot"></div>
+          <p>Loading flavor matrix…</p>
+        </div>
+      </section>
+
+      <main class="grid hidden" id="grid">
+        <section class="panel" id="explorePanel">
+          <div class="panel-header">
+            <div>
+              <h2>Explore ingredients</h2>
+              <p class="panel-sub">Search or scroll, then click a name.</p>
+            </div>
+            <input
+              id="searchInput"
+              class="search"
+              type="search"
+              placeholder="Search ingredients"
+            />
+          </div>
+          <ul id="ingredientList" class="ingredient-list"></ul>
+        </section>
+
+        <section class="panel" id="similarPanel">
+          <div class="panel-header">
+            <div>
+              <h2>Similar ingredients</h2>
+              <p class="panel-sub" id="similarMeta">
+                Select an ingredient to see top matches.
+              </p>
+            </div>
+            <button id="addActiveBtn" class="btn" disabled>Add to basket</button>
+          </div>
+          <div class="active-ingredient" id="activeIngredient">
+            No ingredient selected
+          </div>
+          <ul id="similarList" class="result-list"></ul>
+        </section>
+
+        <section class="panel" id="basketPanel">
+          <div class="panel-header">
+            <div>
+              <h2>Your basket</h2>
+              <p class="panel-sub" id="basketMeta">
+                Pick ingredients to get blend-friendly suggestions.
+              </p>
+            </div>
+            <button id="clearBasketBtn" class="btn ghost" disabled>Clear</button>
+          </div>
+          <div id="basketList" class="basket"></div>
+          <ul id="suggestList" class="result-list"></ul>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>
+          Scoring uses cosine similarity on shared non-zero anchors, with a mild
+          coverage weight. Missing values are ignored rather than penalized.
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
